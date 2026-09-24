@@ -1,0 +1,222 @@
+{
+  "info": {
+    "name": "Milvus RAG API",
+    "description": "Milvus 向量数据库 RAG 系统 API 接口集合",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "健康检查",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/health",
+          "host": ["{{base_url}}"],
+          "path": ["health"]
+        }
+      }
+    },
+    {
+      "name": "查询知识库 - 混合检索",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"query\": \"人工智能发展\",\n  \"top_k\": 5,\n  \"search_type\": \"hybrid\",\n  \"vector_weight\": 0.7,\n  \"rerank\": false\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/query",
+          "host": ["{{base_url}}"],
+          "path": ["query"]
+        }
+      }
+    },
+    {
+      "name": "查询知识库 - 向量检索",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"query\": \"大模型技术\",\n  \"top_k\": 10,\n  \"search_type\": \"vector\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/query",
+          "host": ["{{base_url}}"],
+          "path": ["query"]
+        }
+      }
+    },
+    {
+      "name": "查询知识库 - 关键词检索",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"query\": \"智能制造\",\n  \"top_k\": 10,\n  \"search_type\": \"keyword\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/query",
+          "host": ["{{base_url}}"],
+          "path": ["query"]
+        }
+      }
+    },
+    {
+      "name": "插入文档",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"text\": \"这是一段测试文本，用于测试文档插入功能。人工智能正在改变我们的生活方式。\",\n  \"source\": \"test_manual\",\n  \"section\": \"测试章节\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/insert",
+          "host": ["{{base_url}}"],
+          "path": ["insert"]
+        }
+      }
+    },
+    {
+      "name": "上传文件",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "file",
+              "type": "file",
+              "src": "",
+              "description": "选择一个 Markdown 文件"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{base_url}}/insert_file",
+          "host": ["{{base_url}}"],
+          "path": ["insert_file"]
+        }
+      }
+    },
+    {
+      "name": "删除文档 - 按ID",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"delete_type\": \"id\",\n  \"value\": [462232663569990436]\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/delete",
+          "host": ["{{base_url}}"],
+          "path": ["delete"]
+        }
+      }
+    },
+    {
+      "name": "删除文档 - 按来源",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"delete_type\": \"source\",\n  \"value\": \"test_manual\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/delete",
+          "host": ["{{base_url}}"],
+          "path": ["delete"]
+        }
+      }
+    },
+    {
+      "name": "删除文档 - 按章节",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"delete_type\": \"section\",\n  \"value\": \"测试章节\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/delete",
+          "host": ["{{base_url}}"],
+          "path": ["delete"]
+        }
+      }
+    },
+    {
+      "name": "获取集合信息",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/collection/info",
+          "host": ["{{base_url}}"],
+          "path": ["collection", "info"]
+        }
+      }
+    },
+    {
+      "name": "获取集合统计",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/collection/stats",
+          "host": ["{{base_url}}"],
+          "path": ["collection", "stats"]
+        }
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8000",
+      "type": "string"
+    }
+  ]
+}
